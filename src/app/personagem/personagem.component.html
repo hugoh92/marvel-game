@@ -1,0 +1,12 @@
+<div class="game-container">
+  <div class="players">
+    <input type="text" placeholder="Jogador 1" [(ngModel)]="player1Name" (input)="searchCharacter(player1Name, 1)">
+    <input type="text" placeholder="Jogador 2" [(ngModel)]="player2Name" (input)="searchCharacter(player2Name, 2)">
+  </div>
+  <div class="thumbnails">
+    <img *ngIf="character1" [src]="character1.thumbnail.path + '.' + character1.thumbnail.extension"
+      alt="{{ player1Name }}">
+    <img *ngIf="character2" [src]="character2.thumbnail.path + '.' + character2.thumbnail.extension"
+      alt="{{ player2Name }}">
+  </div>
+</div>

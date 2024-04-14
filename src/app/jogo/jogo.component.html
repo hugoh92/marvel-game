@@ -1,0 +1,14 @@
+<div class="game-container">
+  <app-personagem></app-personagem>
+  <div class="board">
+    <div *ngFor="let row of board; let i = index" class="row">
+      <div *ngFor="let cell of row; let j = index" class="cell" (click)="makeMove(i, j)">
+        {{ cell }}
+      </div>
+    </div>
+  </div>asdasd
+  <div class="score">
+    <p>Jogador 1: {{ player1Score }} vitórias</p>
+    <p>Jogador 2: {{ player2Score }} vitórias</p>
+  </div>
+</div>
