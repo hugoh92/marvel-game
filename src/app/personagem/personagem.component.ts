@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, EventEmitter, Injectable } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Injectable, Output } from '@angular/core';
 import { JogoComponent } from '../jogo/jogo.component';
-import { CharacterService } from '../character.service';
+import { CharacterService } from '../services/character.service';
 import * as CryptoJS from 'crypto-js';
 
 @Component({
@@ -19,23 +19,46 @@ export class PersonagemComponent {
   character2: any;
   player1Name: string;
   player2Name: string;
+  errorMessage: string = '';
+  player1Selected: boolean = false;
+  player2Selected: boolean = false;
+
+  @Output() charactersSelected: EventEmitter<boolean> = new EventEmitter<boolean>();
+  static charactersSelected: any;
 
   constructor(private characterService: CharacterService) { }
 
-  searchCharacter(name: string, playerNumber: number) {
-    const ts = new Date().getTime();
-    const hash = CryptoJS.MD5(ts + this.privateKey + this.publicKey).toString();
-
+  searchCharacter(playerNumber: number) {
+    const name = playerNumber === 1 ? this.player1Name : this.player2Name;
+    if (name.trim() === '') return; // Não realiza a busca se o nome estiver vazio
     this.characterService.getCharacterByName(name).subscribe((data: any) => {
+      if (playerNumber === 1) {
+        this.player1Selected = true;
+      } else if (playerNumber === 2) {
+        this.player2Selected = true;
+      }
+
+      if (this.player1Selected && this.player2Selected) {
+        this.charactersSelected.emit(true);
+      }
       if (data.data.results.length > 0) {
         if (playerNumber === 1) {
           this.character1 = data.data.results[0];
         } else {
           this.character2 = data.data.results[0];
         }
+        this.errorMessage = ''; // Limpa a mensagem de erro
       } else {
-        // Fazer logica para nao encontrado
+        this.errorMessage = 'Personagem não encontrado'; // Define a mensagem de erro
       }
     });
+  }
+
+  checkCharactersSelected() {
+    if (this.player1Name !== '' && this.player2Name !== '') {
+      this.charactersSelected.emit(true);
+    } else {
+      this.charactersSelected.emit(false);
+    }
   }
 }

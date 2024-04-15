@@ -1,6 +1,7 @@
 import { PersonagemComponent } from '../personagem/personagem.component';
-import { Component, OnInit, EventEmitter, Output, Injectable } from '@angular/core';
-import { CharacterService } from '../character.service';
+import { Component, OnInit, EventEmitter, Output, Injectable, Input } from '@angular/core';
+import { CharacterService } from '../services/character.service';
+import { ScoreService } from '../services/score.service';
 import { FormsModule } from '@angular/forms';
 import * as CryptoJS from 'crypto-js';
 
@@ -9,35 +10,55 @@ enum Player {
   O = 'O',
 }
 
+@Injectable({
+  providedIn: 'root'
+})
+
 @Component({
   selector: 'app-jogo',
   templateUrl: './jogo.component.html',
   styleUrls: ['./jogo.component.scss']
 })
 
-
 export class JogoComponent implements OnInit {
   board: Player[][];
   currentPlayer: Player;
   winner: Player | null;
-  player1Score = 0;
-  player2Score = 0;
   player1Name = '';
   player2Name = '';
-  character1: any; // Placeholder for character data
-  character2: any; // Placeholder for character data
+  character1: any;
+  character2: any;
   privateKey: any;
   publicKey: any;
+  player1Selected: boolean = false;
+  player2Selected: boolean = false;
+  charactersSelected: boolean = false;
 
-  constructor(private characterService: CharacterService) { }
+  constructor(private characterService: CharacterService, private scoreService: ScoreService) { }
 
   ngOnInit() {
-    this.initializeGame();
+
   }
 
+  determineFirstPlayer() {
+    // Gere um número aleatório entre 0 e 1
+    const random = Math.random();
+
+    // Se o número aleatório for menor que 0.5, o jogador 1 começa; caso contrário, o jogador 2 começa
+    this.currentPlayer = random < 0.5 ? Player.X : Player.O;
+    const startingPlayer = this.currentPlayer === Player.X ? 'Jogador 1' : 'Jogador 2';
+    alert(startingPlayer + ' começa jogando.');
+  }
+
+  updateCharactersSelected(event: boolean) {
+    this.charactersSelected = event;
+    if (this.charactersSelected) {
+      this.initializeGame(); // Iniciar o jogo quando os personagens estiverem selecionados
+    }
+  }
   initializeGame() {
     this.board = Array(3).fill(null).map(() => Array(3).fill(null));
-    this.currentPlayer = Player.X;
+    this.determineFirstPlayer();
     this.winner = null;
   }
 
@@ -46,28 +67,32 @@ export class JogoComponent implements OnInit {
       this.board[row][col] = this.currentPlayer;
       this.checkWinner(row, col);
       if (this.winner) {
-        this.updateScore();
-        //this.updateScore.emit(); // Emitir evento de atualização da pontuação
-        this.restartGame(); // Chama updateScore() se houver um vencedor
+        setTimeout(() => {
+          alert('O Jogador ' + (this.currentPlayer === Player.O ? '1' : '2') + ' ganhou.');
+          //this.updateScore();
+          this.scoreService.updateScore(this.winner);
+          this.restartGame();
+        }, 1);
+
       }
       this.currentPlayer = this.currentPlayer === Player.X ? Player.O : Player.X;
     }
   }
 
   checkWinner(row: number, col: number) {
-    // Verifique combinações horizontais
+    // Verifica se horizontais estao iguais
     if (this.board[row].every(cell => cell === this.currentPlayer)) {
       this.winner = this.currentPlayer;
       return;
     }
 
-    // Verifique combinações verticais
+    // Verifica se verticais estao iguais
     if (this.board.every(rowArr => rowArr[col] === this.currentPlayer)) {
       this.winner = this.currentPlayer;
       return;
     }
 
-    // Verifique diagonais
+    // Verifica se as diagonais estao iguais
     if (row === col || row + col === 2) {
       if (this.board[0][0] === this.currentPlayer && this.board[1][1] === this.currentPlayer && this.board[2][2] === this.currentPlayer) {
         this.winner = this.currentPlayer;
@@ -99,34 +124,9 @@ export class JogoComponent implements OnInit {
     }
   }
 
-
   restartGame() {
     this.initializeGame();
   }
 
-  updateScore() {
-    if (this.winner === Player.X) {
-      this.player1Score++;
-    } else if (this.winner === Player.O) {
-      this.player2Score++;
-    }
-  }
-
-  searchCharacter(name: string, playerNumber: number) {
-    const ts = new Date().getTime();
-    const hash = CryptoJS.MD5(ts + this.privateKey + this.publicKey).toString(); // Calculate hash
-
-    this.characterService.getCharacterByName(name).subscribe((data: any) => {
-      if (data.data.results.length > 0) {
-        if (playerNumber === 1) {
-          this.character1 = data.data.results[0];
-        } else {
-          this.character2 = data.data.results[0];
-        }
-      } else {
-        // Handle character not found
-      }
-    });
-  }
 }
 
