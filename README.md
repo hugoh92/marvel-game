@@ -1,3 +1,53 @@
+# Descrição da Aplicação - Marvel Jogo da velha
+O "Marvel Jogo da Velha" é uma aplicação web desenvolvida utilizando o framework Angular 10.0.5. O objetivo do jogo é oferecer uma experiência divertida e interativa baseada no clássico jogo da velha, onde os jogadores podem escolher seus personagens favoritos do universo Marvel para representá-los no jogo. Os jogadores podem competir entre si, alternando entre os heróis e vilões da Marvel, enquanto tentam formar sequências de três símbolos (X ou O) na vertical, horizontal ou diagonal.
+
+## Características do App
+<b>Seleção de Personagens da Marvel:</b> Os jogadores podem escolher entre uma ampla variedade de personagens do universo Marvel, como Hulk, Homem de Ferro, Capitão América, Thanos, entre outros, para representá-los no tabuleiro.
+
+<b>Jogo da Velha Interativo:</b> O jogo oferece uma experiência clássica do jogo da velha, onde os jogadores alternam entre suas jogadas para tentar vencer o adversário.
+
+<b>Animações e Efeitos Visuais:</b> Animações e efeitos visuais aprimoram a experiência de jogo, incluindo transições suaves entre as jogadas e feedback visual para indicar o vencedor ou um empate.
+
+<b>Pontuações e Estatísticas:</b> O aplicativo mantém o controle das pontuações dos jogadores, registrando o número de vitórias de cada um ao longo do tempo.
+
+# Instruções de Execução e Instalação do Projeto
+
+## Pré-requisitos
+Node.js e npm instalados na máquina local.
+
+Angular CLI instalado globalmente.
+
+## Instalação
+
+Clone o repositório do projeto do GitHub para o seu ambiente local.
+
+No terminal, navegue até o diretório raiz do projeto.
+
+Execute o comando `npm install` para instalar as dependências do projeto.
+
+## Execução
+
+Execute `ng serve` no terminal para iniciar a aplicação em modo de desenvolvimento.
+
+Acesse a aplicação no navegador através do endereço http://localhost:4200/.
+
+# Pacotes Utilizados
+- <b>Angular CLI:</b> Ferramenta de linha de comando do Angular para criar, compilar e executar aplicativos Angular.
+- <b>CryptoJS:</b> Biblioteca utilizada para criptografia e descriptografia de dados, para acessar os dados da API.
+- <b>SweetAlert2:</b> Biblioteca para exibição de caixas de diálogo e alertas personalizados.
+- <b>Jasmine:</b> Framework de teste de comportamento para JavaScript, usado para escrever e executar testes unitários em aplicativos Angular.
+
+# Execução de Testes
+Foram criados alguns testes de exemplo são eles:
+
+<b>Teste "componente criado":</b> Este teste verifica se o componente foi criado com sucesso. Ele garante que a instância do componente seja criada corretamente durante o processo de teste.
+
+<b>Teste "jogo inicia corretamente":</b> Este teste verifica se o jogo é inicializado corretamente quando o método initializeGame() é chamado. Ele verifica se o tabuleiro é criado como uma matriz de células vazias, se o jogador atual é definido e se o vencedor é nulo no início do jogo.
+
+<b>Teste "jogadores alternados corretamente:"</b> Este teste verifica se os jogadores alternam corretamente após cada movimento. Ele simula o movimento de um jogador e verifica se o próximo jogador é atribuído corretamente.
+
+Execute `npm test` para executar todos os testes disponíveis.
+
 # MarvelApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.5.
