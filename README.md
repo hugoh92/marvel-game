@@ -15,6 +15,29 @@ O "Marvel Jogo da Velha" é uma aplicação web desenvolvida utilizando o framew
 
 <b>Pontuações e Estatísticas:</b> O aplicativo mantém o controle das pontuações dos jogadores, registrando o número de vitórias de cada um ao longo do tempo.
 
+## Estrutura do Projeto
+
+O projeto está estruturado com os componentes, services e pastas distribuidos da seguinte maneira:
+
+Marvel-app/
+- ├── src/                  # Código-fonte do aplicativo
+- │   ├── app/              # Componentes e módulos principais
+- │   ├── ├── jogo/         # Componente principal do jogo da velha.
+- │   ├── ├── personagem/   # Componente para seleção de personagens.
+- │   ├── ├── navbar/       # Componente para a barra de navegação.
+- │   ├── ├── services/     # Componente para a barra de navegação.
+- │   ├── ├── ├── score/    # Serviço para gerenciar os placares do jogo.
+- │   ├── ├── ├── character/ #Serviço para obter informações sobre personagens da Marvel.
+- │   ├── assets/           # Recursos estáticos (imagens, etc.)
+- │   ├── environments/     # Configurações de ambiente
+- │   ├── theme/            # Estilos do aplicativo
+- │   ├── index.html        # Página HTML principal
+- ├── .gitignore            # Arquivos e pastas ignorados pelo Git
+- ├── angular.json          # Configurações do Angular CLI
+- ├── ionic.config.json     # Configurações do Ionic CLI
+- ├── package.json          # Dependências e scripts do projeto
+- ├── README.md             # Documentação do projeto
+
 # Instruções de Execução e Instalação do Projeto
 
 ## Pré-requisitos
