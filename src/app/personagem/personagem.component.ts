@@ -18,8 +18,6 @@ enum Player {
   providedIn: 'root'
 })
 export class PersonagemComponent {
-  privateKey: any;
-  publicKey: any;
   character1: any;
   character2: any;
   player1Name: string;
@@ -29,9 +27,9 @@ export class PersonagemComponent {
   player2Selected: boolean = false;
   @Input() currentPlayer: Player;
   @Output() charactersSelected: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() characterSelected = new EventEmitter<any>();
+
   static charactersSelected: any;
-
-
   constructor(private characterService: CharacterService, private JogoComponent: JogoComponent) { }
 
   searchCharacter(playerNumber: number) {
@@ -55,16 +53,8 @@ export class PersonagemComponent {
         }
         this.errorMessage = ''; // Limpa a mensagem de erro
       } else {
-        this.errorMessage = 'Personagem não encontrado'; // Define a mensagem de erro
+        this.errorMessage = 'Personagem não encontrado Dica:Pesquise em inglês.'; // Define a mensagem de erro
       }
     });
-  }
-
-  checkCharactersSelected() {
-    if (this.player1Name !== '' && this.player2Name !== '') {
-      this.charactersSelected.emit(true);
-    } else {
-      this.charactersSelected.emit(false);
-    }
   }
 }

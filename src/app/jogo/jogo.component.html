@@ -9,7 +9,7 @@
     <div class="board">
       <div *ngFor="let row of board; let i = index" class="row">
         <div *ngFor="let cell of row; let j = index" class="cell" (click)="makeMove(i, j)">
-          {{ cell }}
+          <span [ngClass]="{'blue-text': cell === 'X', 'red-text': cell === 'O'}">{{ cell }}</span>
         </div>
       </div>
     </div>

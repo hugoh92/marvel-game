@@ -1,4 +1,4 @@
-import { PersonagemComponent } from '../personagem/personagem.component';
+import { PersonagemComponent } from './../personagem/personagem.component';
 import { Component, OnInit, EventEmitter, Output, Injectable, Input } from '@angular/core';
 import { CharacterService } from '../services/character.service';
 import { ScoreService } from '../services/score.service';
@@ -7,7 +7,7 @@ import * as CryptoJS from 'crypto-js';
 import Swal from 'sweetalert2';
 
 
-enum Player {
+export enum Player {
   X = 'X',
   O = 'O',
 }
@@ -28,8 +28,6 @@ export class JogoComponent implements OnInit {
   winner: Player | null;
   player1Name = '';
   player2Name = '';
-  character1: any;
-  character2: any;
   privateKey: any;
   publicKey: any;
   player1Selected: boolean = false;
@@ -39,13 +37,17 @@ export class JogoComponent implements OnInit {
   constructor(private characterService: CharacterService, private scoreService: ScoreService) { }
 
   ngOnInit() {
-
+    Swal.fire({
+      title: ('Jogo da velha MARVEL'),
+      text:('Cada Jogador digita um personagem marvel, clica em buscar e começa o jogo!'),
+      icon: 'info',
+      position: 'center'
+    });
   }
 
   determineFirstPlayer() {
     // Gere um número aleatório entre 0 e 1
     const random = Math.random();
-
     // Se o número aleatório for menor que 0.5, o jogador 1 começa; caso contrário, o jogador 2 começa
     this.currentPlayer = random < 0.5 ? Player.X : Player.O;
     const startingPlayer = this.currentPlayer === Player.X ? 'Jogador 1' : 'Jogador 2';
@@ -65,6 +67,7 @@ export class JogoComponent implements OnInit {
     }
   }
 
+
   initializeGame() {
     this.board = Array(3).fill(null).map(() => Array(3).fill(null));
     this.determineFirstPlayer();
@@ -72,6 +75,7 @@ export class JogoComponent implements OnInit {
   }
 
   makeMove(row: number, col: number) {
+    console.log("Personagens inválidos. O jogo não pode ser iniciado.");
     if (!this.board[row][col] && !this.winner) {
       this.board[row][col] = this.currentPlayer;
       this.checkWinner(row, col);

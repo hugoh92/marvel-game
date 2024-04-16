@@ -12,14 +12,19 @@
   <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
   <div class="thumbnails">
     <div class="player" [class.active]="currentPlayer === 'X'">
-      <img class="inter-blue" *ngIf="!character1" src="assets/img/iner.png" alt="Interrogação">
-      <img *ngIf="character1" [src]="character1.thumbnail.path + '.' + character1.thumbnail.extension"
+      <img class="inter-blue"  *ngIf="!character1" src="assets/img/iner.png" alt="Interrogação">
+      <img *ngIf="character1" [ngStyle]="{'border-color': player1Selected ? '#0095ff' : 'initial'}" [src]="character1.thumbnail.path + '.' + character1.thumbnail.extension"
         alt="Personagem 1">
+        <p class="name" *ngIf="character1">{{ character1.name }}</p>
+        
     </div>
+
     <div class="versus">X</div>
-    <div class="player" [class.active]="currentPlayer === 'O'">
+    <div class="player player-red" [class.active]="currentPlayer === 'O'">
       <img class="inter-red" *ngIf="!character2" src="assets/img/iner.png" alt="Interrogação">
-      <img *ngIf="character2" [src]="character2.thumbnail.path + '.' + character2.thumbnail.extension"
+      <img *ngIf="character2" [ngStyle]="{'border-color': player1Selected ? 'red' : 'initial'}" [src]="character2.thumbnail.path + '.' + character2.thumbnail.extension"
         alt="Personagem 2">
+        <p class="name" *ngIf="character2">{{ character2.name }}</p>
     </div>
+
   </div>
