@@ -1,5 +1,7 @@
 # Descrição da Aplicação - Marvel Jogo da velha
-O "Marvel Jogo da Velha" é uma aplicação web desenvolvida utilizando o framework Angular 10.0.5. O objetivo do jogo é oferecer uma experiência divertida e interativa baseada no clássico jogo da velha, onde os jogadores podem escolher seus personagens favoritos do universo Marvel para representá-los no jogo. Os jogadores podem competir entre si, alternando entre os heróis e vilões da Marvel, enquanto tentam formar sequências de três símbolos (X ou O) na vertical, horizontal ou diagonal.
+O "Marvel Jogo da Velha" é uma aplicação web desenvolvida utilizando o framework Angular 10.0.5. O objetivo do jogo é oferecer uma experiência divertida e interativa baseada no clássico jogo da velha, onde os jogadores podem escolher seus personagens favoritos do universo Marvel para representá-los no jogo. Os jogadores podem competir entre si, alternando entre os heróis e vilões da Marvel, enquanto tentam formar sequências de três símbolos (X ou O) na vertical, horizontal ou diagonal. O joog está hospedado no link https://marvel-game-hugo.netlify.app/
+
+![](example.png)
 
 ## Características do App
 <b>Seleção de Personagens da Marvel:</b> Os jogadores podem escolher entre uma ampla variedade de personagens do universo Marvel, como Hulk, Homem de Ferro, Capitão América, Thanos, entre outros, para representá-los no tabuleiro.
