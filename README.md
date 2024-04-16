@@ -25,7 +25,7 @@ Marvel-app/
 - │   ├── ├── jogo/         # Componente principal do jogo da velha.
 - │   ├── ├── personagem/   # Componente para seleção de personagens.
 - │   ├── ├── navbar/       # Componente para a barra de navegação.
-- │   ├── ├── services/     # Componente para a barra de navegação.
+- │   ├── ├── services/     # Serviços.
 - │   ├── ├── ├── score/    # Serviço para gerenciar os placares do jogo.
 - │   ├── ├── ├── character/ #Serviço para obter informações sobre personagens da Marvel.
 - │   ├── assets/           # Recursos estáticos (imagens, etc.)
