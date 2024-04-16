@@ -1,22 +1,25 @@
 <div class="game-container">
   <div class="players">
-    <input type="text" placeholder="Jogador 1" [(ngModel)]="player1Name">
-    <button (click)="searchCharacter(1)">Buscar</button>
-    <input type="text" placeholder="Jogador 2" [(ngModel)]="player2Name">
-    <button (click)="searchCharacter(2)">Buscar</button>
+    <div class="p1">
+      <input type="text" placeholder="Jogador 1" [(ngModel)]="player1Name">
+      <button class="button-7 bt-blue" (click)="searchCharacter(1)">Buscar</button>
+    </div>
+    <div class="p2">
+      <input type="text" placeholder="Jogador 2" [(ngModel)]="player2Name">
+      <button class="button-7 bt-red" (click)="searchCharacter(2)">Buscar</button>
+    </div>
   </div>
   <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
   <div class="thumbnails">
-
-    <div class="player">
-      <img *ngIf="!character1" src="assets/img/iner.png" alt="Interrogação" style="width: 300px; height: 300px;">
+    <div class="player" [class.active]="currentPlayer === 'X'">
+      <img class="inter-blue" *ngIf="!character1" src="assets/img/iner.png" alt="Interrogação">
       <img *ngIf="character1" [src]="character1.thumbnail.path + '.' + character1.thumbnail.extension"
-        alt="Personagem 1" style="width: 300px; height: 300px;">
+        alt="Personagem 1">
     </div>
-
-    <div class="player">
-      <img *ngIf="!character2" src="assets/img/iner.png" alt="Interrogação" style="width: 300px; height: 300px;">
+    <div class="versus">X</div>
+    <div class="player" [class.active]="currentPlayer === 'O'">
+      <img class="inter-red" *ngIf="!character2" src="assets/img/iner.png" alt="Interrogação">
       <img *ngIf="character2" [src]="character2.thumbnail.path + '.' + character2.thumbnail.extension"
-        alt="Personagem 2" style="width: 300px; height: 300px;">
+        alt="Personagem 2">
     </div>
   </div>

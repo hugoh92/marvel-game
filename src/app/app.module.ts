@@ -10,7 +10,6 @@ import { PersonagemComponent } from './personagem/personagem.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ScoreService } from './services/score.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +21,8 @@ import { ScoreService } from './services/score.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    
   ],
   providers: [
     CharacterService,

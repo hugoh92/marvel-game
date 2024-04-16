@@ -4,6 +4,8 @@ import { CharacterService } from '../services/character.service';
 import { ScoreService } from '../services/score.service';
 import { FormsModule } from '@angular/forms';
 import * as CryptoJS from 'crypto-js';
+import Swal from 'sweetalert2';
+
 
 enum Player {
   X = 'X',
@@ -47,15 +49,22 @@ export class JogoComponent implements OnInit {
     // Se o número aleatório for menor que 0.5, o jogador 1 começa; caso contrário, o jogador 2 começa
     this.currentPlayer = random < 0.5 ? Player.X : Player.O;
     const startingPlayer = this.currentPlayer === Player.X ? 'Jogador 1' : 'Jogador 2';
-    alert(startingPlayer + ' começa jogando.');
+    Swal.fire({
+      title: (startingPlayer + ' começa jogando.'),
+      icon: 'info',
+      position: 'center'
+    });
   }
 
   updateCharactersSelected(event: boolean) {
     this.charactersSelected = event;
     if (this.charactersSelected) {
-      this.initializeGame(); // Iniciar o jogo quando os personagens estiverem selecionados
+      setTimeout(() => {
+        this.initializeGame(); // Iniciar o jogo quando os personagens estiverem selecionados
+      }, 1);
     }
   }
+
   initializeGame() {
     this.board = Array(3).fill(null).map(() => Array(3).fill(null));
     this.determineFirstPlayer();
@@ -68,11 +77,16 @@ export class JogoComponent implements OnInit {
       this.checkWinner(row, col);
       if (this.winner) {
         setTimeout(() => {
-          alert('O Jogador ' + (this.currentPlayer === Player.O ? '1' : '2') + ' ganhou.');
-          //this.updateScore();
-          this.scoreService.updateScore(this.winner);
-          this.restartGame();
-        }, 1);
+          Swal.fire({
+            title: ('O Jogador ' + (this.currentPlayer === Player.O ? '1' : '2') + ' ganhou.'),
+            icon: 'success',
+            position: 'center'
+          }).then(() => {
+            // Ação a ser executada após o fechamento do primeiro popup
+            this.scoreService.updateScore(this.winner);
+            this.initializeGame();
+          });
+        }, 100);
 
       }
       this.currentPlayer = this.currentPlayer === Player.X ? Player.O : Player.X;
@@ -120,7 +134,11 @@ export class JogoComponent implements OnInit {
     if (isDraw) {
       // Empate (velha)
       this.restartGame();
-      alert('Empate! O jogo terminou em empate.');
+      Swal.fire({
+        title: ('Deu velha o jogo terminou em empate.'),
+        icon: 'error',
+        position: 'center'
+      });
     }
   }
 

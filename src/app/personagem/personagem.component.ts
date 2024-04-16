@@ -1,7 +1,12 @@
+import { JogoComponent } from './../jogo/jogo.component';
 import { Component, Input, OnInit, EventEmitter, Injectable, Output } from '@angular/core';
-import { JogoComponent } from '../jogo/jogo.component';
 import { CharacterService } from '../services/character.service';
 import * as CryptoJS from 'crypto-js';
+
+enum Player {
+  X = 'X',
+  O = 'O',
+}
 
 @Component({
   selector: 'app-personagem',
@@ -22,11 +27,12 @@ export class PersonagemComponent {
   errorMessage: string = '';
   player1Selected: boolean = false;
   player2Selected: boolean = false;
-
+  @Input() currentPlayer: Player;
   @Output() charactersSelected: EventEmitter<boolean> = new EventEmitter<boolean>();
   static charactersSelected: any;
 
-  constructor(private characterService: CharacterService) { }
+
+  constructor(private characterService: CharacterService, private JogoComponent: JogoComponent) { }
 
   searchCharacter(playerNumber: number) {
     const name = playerNumber === 1 ? this.player1Name : this.player2Name;
